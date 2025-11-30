@@ -9,7 +9,7 @@
   [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?style=for-the-badge)](https://www.python.org/)
   [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://github.com/psf/black)
 
-  [**Read the Paper**](https://arxiv.org/abs/2505.15859) | [**Documentation**](https://autodata.readthedocs.io) | [**Contributing**](./CONTRIBUTING.md)
+  [**Read the Paper**](https://arxiv.org/abs/2505.15859) | [**Documentation**](https://autodata-doc.readthedocs.io/en/latest/) | [**Contributing**](./CONTRIBUTING.md)
 
 </div>
 
