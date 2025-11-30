@@ -2,7 +2,7 @@
 
 <div align="center">
   
-  <img src="resources/pics/autodata_icon_by_gemini.png" width="100%" alt="AutoData Banner">
+  <img src="resources/pics/autodata_icon_by_gemini.png" width="40%" alt="AutoData Banner">
 
   [![NeurIPS 2025](https://img.shields.io/badge/NeurIPS-2025-4b44ce.svg?style=for-the-badge)](https://neurips.cc/)
   [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=for-the-badge)](./LICENSE)
