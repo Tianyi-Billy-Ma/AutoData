@@ -1,0 +1,86 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-toml
+      - id: debug-statements
+      - id: name-tests-test
+      - id: requirements-txt-fixer
+
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        language_version: python3.10
+        args: [--line-length=88]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-all]
+        args: [--ignore-missing-imports]
+        language_version: python3.10
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: [-r, ., -f, json, -o, bandit-report.json]
+        exclude: ^tests/
+
+  - repo: https://github.com/PyCQA/safety
+    rev: 2.3.5
+    hooks:
+      - id: safety
+        args: [--full-report]
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.13.2
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=88]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      - id: pyupgrade
+        args: [--py310-plus]
+
+  - repo: https://github.com/pre-commit/mirrors-pytest
+    rev: v7.4.3
+    hooks:
+      - id: pytest
+        args: [--tb=short, --strict-markers]
+        additional_dependencies: [pytest-asyncio, pytest-cov, pytest-mock]
+
+  - repo: local
+    hooks:
+      - id: uv-ruff-format
+        name: uv run ruff format
+        entry: uv run ruff format
+        language: system
+        pass_filenames: false
+      - id: uv-ruff-check
+        name: uv run ruff check --fix
+        entry: uv run ruff check --fix
+        language: system
+        pass_filenames: false
+      - id: check-imports
+        name: Check imports
+        entry: python -c "import autodata; print('✓ All imports successful')"
+        language: system
+        pass_filenames: false
+        always_run: true
+
+ci:
+  autofix_commit_msg: "style: auto-fix code style issues"
+  autoupdate_commit_msg: "chore: update pre-commit hooks"

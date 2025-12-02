@@ -1,0 +1,104 @@
+# AutoData Default Configuration
+# This file defines per-section settings consumed by TaskConfig and its siblings.
+
+task_config:
+  config: configs/default.yaml
+  config_format: yaml
+  task: |
+    Collect daily stock information for AAPL in 2024.
+    The dataset format should be a dictionary with the following keys:
+    Date: The date of the stock in format YYYY-MM-DD.
+    Open: Open trading day price.
+    High: Highest price within the trading day.
+    Low: Lowest price within the trading day.
+    Close: Close trading day price.
+    Volume: Total number of shares traded within the trading day.
+    adjOpen: Open trading day price, adjusted by corporate actions.
+    adjHigh: Highest price within the trading day, adjusted by corporate actions.
+    adjLow: Lowest price within the trading day, adjusted by corporate actions.
+    adjClose: Close trading day price, adjusted by corporate actions.
+    adjVolume: Total number of shares traded within the trading day, adjusted for stock splits.
+    divCash: The cash dividend distributed per share.
+  run_name: default_run
+  disable_human: true
+  task_timeout: 3600
+  execution_strategy: stream
+  dry_run: false
+  verbose: false
+  visualize_graph: false
+
+storage_config:
+  type: file
+  output_dir: ./outputs
+  file_format: json
+  compression: null
+  database_url: null
+  overwrite: true
+  force_overwrite: true
+
+log_config:
+  metrics_enabled: true
+  metrics_port: 9090
+  log_level: INFO
+  log_file: null
+
+llm_config:
+  model: gpt-4o
+  model_provider: openai
+  temperature: 0.0
+  base_url: null
+  api_key: null
+  configurable_fields: null
+
+tool_config:
+  run_dir: null
+  work_dir: null
+  tools_cache_dir: null
+  PerplexitySearchToolModel: sonar
+
+ohcache_config:
+  enable_ohcache: true
+  cache_dir: null
+  auto_cleanup: false
+  hyperedges:
+    - source: [PlanAgent]
+      target: [SupervisorAgent, HumanAgent, PlanAgent]
+    - source: [HumanAgent]
+      target: [SupervisorAgent]
+    - source: [ToolAgent]
+      target: [SupervisorAgent, BrowserAgent, BlueprintAgent]
+    - source: [BrowserAgent]
+      target: [SupervisorAgent, ToolAgent, BlueprintAgent]
+    - source: [BlueprintAgent]
+      target: [SupervisorAgent, EngineerAgent, TestAgent, ValidationAgent, TestAgent]
+    - source: [EngineerAgent]
+      target: [SupervisorAgent, TestAgent, ValidationAgent]
+    - source: [TestAgent]
+      target: [SupervisorAgent, EngineerAgent, ValidationAgent]
+    - source: [ValidationAgent]
+      target: [SupervisorAgent, EngineerAgent, TestAgent]
+
+checkpoint_config:
+  checkpoint_enabled: true
+  auto_checkpoint: true
+  checkpoint_dir: null
+  export_json: false
+  resume_from: null
+  max_checkpoints: null
+
+plugin_config:
+  enabled_plugins: []
+
+browser_use_browser_config:
+  headless: true
+  disable_security: false
+  user_agent: null
+  args: null
+  record_video_dir: null
+
+browser_use_agent_config:
+  max_steps: 20
+  max_actions_per_step: 50
+  llm_timeout: 120
+  generate_gif: false
+  file_system_path: null

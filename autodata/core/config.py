@@ -1,0 +1,57 @@
+"""Backwards-compatible exports for configuration utilities."""
+
+from __future__ import annotations
+
+from autodata.configs import (
+    API_INFO,
+    SUPPORTED_CONFIG_FORMATS,  # re-export constant
+    APIMetadata,
+    AutoDataConfig,
+    BrowserUseAgentConfig,
+    BrowserUseBrowserConfig,
+    BrowserUseConfig,
+    CheckpointConfig,
+    HyperedgeConfig,
+    LLMConfig,
+    LogConfig,
+    OHCacheConfig,
+    PluginConfig,
+    StorageConfig,
+    TaskConfig,
+    ToolConfig,
+    dump_config_data,
+    get_api_info,
+    iter_api_metadata,
+    load_config_data,
+    load_environment_variables_from_file,
+    normalize_config_format,
+    split_browser_agent_arguments,
+    verify_environment_variables,
+)
+
+__all__ = [
+    "API_INFO",
+    "APIMetadata",
+    "AutoDataConfig",
+    "BrowserUseAgentConfig",
+    "BrowserUseBrowserConfig",
+    "BrowserUseConfig",
+    "CheckpointConfig",
+    "HyperedgeConfig",
+    "LLMConfig",
+    "LogConfig",
+    "OHCacheConfig",
+    "PluginConfig",
+    "StorageConfig",
+    "TaskConfig",
+    "ToolConfig",
+    "SUPPORTED_CONFIG_FORMATS",
+    "dump_config_data",
+    "get_api_info",
+    "iter_api_metadata",
+    "load_config_data",
+    "load_environment_variables_from_file",
+    "normalize_config_format",
+    "split_browser_agent_arguments",
+    "verify_environment_variables",
+]

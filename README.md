@@ -13,11 +13,13 @@
 
 </div>
 
+> **Version 0.1.0 (Beta).** AutoData is currently in beta; expect rapid iteration and occasional breaking changes while we harden the multi-agent orchestration stack.
+
 ---
 
 ## 📖 Introduction
 
-**AutoData** is a pioneering multi-agent system designed to revolutionize data collection from the open web. Accepted at **NeurIPS 2025**, AutoData automates the generation of crawlers and the extraction of data from diverse online sources, addressing the complexities of modern web environments.
+**AutoData (v0.1.0 Beta)** is a pioneering multi-agent system designed to revolutionize data collection from the open web. Accepted at **NeurIPS 2025**, AutoData automates the generation of crawlers and the extraction of data from diverse online sources, addressing the complexities of modern web environments.
 
 Traditional web scraping often requires manual script maintenance and struggles with dynamic content. AutoData overcomes these challenges by employing a sophisticated **Supervisor-Squad** architecture, where specialized agents collaborate to plan, navigate, and extract data efficiently.
 
@@ -70,7 +72,7 @@ The core of AutoData lies in its hierarchical agent design and the OHCache mecha
 
 2.  **Install dependencies and environment:**
     ```bash
-    uv sync --group dev,test,docs
+    uv sync
     ```
 
 3.  **Install browser binaries:**
@@ -100,11 +102,13 @@ export OPENROUTER_API_KEY="your-openrouter-key"
 export OPENROUTER_BASE_URL="https://openrouter.ai/api/v1"
 ```
 
+> Prefer saving keys once in a `.env` file (`cp .env.example .env`) instead of exporting them in every terminal. AutoData automatically loads `.env`, `.env.local`, and `~/.autodata/.env` before parsing configs, so `uv run python -m autodata.main ...` always finds your credentials.
+
 Configure your model in `configs/default.yaml`:
 
 ```yaml
 llm_config:
-  model: "gpt-4o-mini"
+  model: "gpt-4o"
   temperature: 0.0
 ```
 
@@ -127,6 +131,14 @@ ls outputs/default_run/
 # ├── summary.json  (Metadata & Dataset reference)
 # └── artifacts/...
 ```
+
+---
+
+## 🧭 Roadmap
+
+- **Plugin ecosystem hardening:** finalize the third-party plugin spec (typed hooks, richer tool manifests) so integrators can ship domain packs without forking.
+- **Automated evaluation harness:** release reproducible browser traces + artifact expectations to benchmark agent reasoning quality between versions.
+- **Hosted orchestrator mode:** add multi-run scheduling, workspace quotas, and audit logs for teams that want to operate AutoData as a shared service.
 
 ---
 
@@ -153,10 +165,9 @@ If you use AutoData in your research, please cite our NeurIPS 2025 paper:
 ```bibtex
 @inproceedings{autodata2025,
   title={AutoData: A Multi-Agent System for Open Web Data Collection},
-  author={Tianyi-Billy-Ma and Contributors},
+  author={Ma, Tianyi and Qian, Yiyue and Zhang, Zheyuan and Wang, Zehong and Qian, Xiaoye and Bai, Feifan and Ding, Yifan and Luo, Xuwei and Zhang, Shinan and Murugesan, Keerthiram and others},
   booktitle={NeurIPS},
   year={2025},
-  url={https://arxiv.org/abs/2505.15859}
 }
 ```
 
